@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/base_image_open_gallery"
+        android:orderInCategory="1"
+        android:title="openGallery - 高斯差分技术"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/cannyEdges"
+        android:orderInCategory="1"
+        android:title="cannyEdges - 边缘检测器"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/sobel"
+        android:orderInCategory="1"
+        android:title="sobel - 算子"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/houghline"
+        android:orderInCategory="1"
+        android:title="houghline - 霍夫直线"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/houghCircles"
+        android:orderInCategory="1"
+        android:title="houghline - 霍夫圆"
+        app:showAsAction="never" />
+</menu>

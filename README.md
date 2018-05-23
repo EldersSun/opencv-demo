@@ -1,1 +1,2 @@
-# opencv-demo
+# openCV demo
+openCV demo

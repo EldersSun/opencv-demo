@@ -1,0 +1,51 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+
+android {
+    compileSdkVersion project.COMPILE_SDK_VERSION as int
+    buildToolsVersion project.BUILD_TOOLS_VERSION
+
+    defaultConfig {
+        applicationId "bzmaster.cloudextendinsurance"
+        minSdkVersion project.MIN_SDK_VERSION as int
+        targetSdkVersion project.TARGET_SDK_VERSION as int
+        versionCode project.VERSION_CODE as int
+        versionName project.VERSION_NAME
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary = true
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: "$buildDir/native-libs",include: 'native-libs.jar')
+    compile "com.android.support:appcompat-v7:$project.COMPILE_TOOLS_VERSION"
+    compile "com.android.support:recyclerview-v7:$project.COMPILE_TOOLS_VERSION"
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    compile project(':openCVLibrary24136')
+    compile('com.jph.takephoto:takephoto_library:4.0.3') {
+        exclude group: 'com.github.bumptech.glide'
+        exclude group: 'top.zibin:Luban'
+    }
+    compile 'me.weyye.hipermission:library:1.0.7'
+    compile 'com.orhanobut:logger:2.2.0'
+    compile 'com.github.bumptech.glide:glide:4.0.0'
+}
+repositories {
+    mavenCentral()
+}
+
+task nativeLibsToJar(type: Jar,description:'create a jar archive of the native libs'){
+    destinationDir file("$buildDir/native-libs")
+    baseName 'native-libs'
+    from fileTree(dir: 'libs',include: '**/*.so')
+    into 'lib/'
+}
+tasks.withType(JavaCompile){
+    compileTask -> compileTask.dependsOn(nativeLibsToJar)
+}
