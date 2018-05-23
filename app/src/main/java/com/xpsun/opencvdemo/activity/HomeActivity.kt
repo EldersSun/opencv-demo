@@ -1,5 +1,6 @@
 package com.xpsun.opencvdemo.activity
 
+import android.content.Context
 import android.content.Intent
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
@@ -60,6 +61,11 @@ class HomeActivity : BaseActivity(), OnItemRecyclerViewClickListener {
         const val ACTION_MODE_TAG: String = "ACTION_MODE"
         private val menus = listOf<String>(
                 "mean blur - 模糊", "gaussian blur - 高斯模糊", "median blur - 中值模糊",
-                "sharpen - 图像锐化", "dilate - 膨胀图像", "erode - 腐蚀图像","threshold - 阈值")
+                "sharpen - 图像锐化", "dilate - 膨胀图像", "erode - 腐蚀图像", "threshold - 阈值")
+
+        fun start(context: Context) {
+            val intent: Intent = Intent(context, HomeActivity::class.java)
+            context.startActivity(intent)
+        }
     }
 }

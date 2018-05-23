@@ -1,5 +1,5 @@
 <component name="libraryTable">
-  <library name="Gradle: __local_jars__:/Users/sunxianpeng/AndroidStudioProjects/github/open_cv_demo/OpenCvDemo/app/build/native-libs/native-libs.jar:unspecified@jar">
+  <library name="Gradle: __local_jars__:/Users/sunxianpeng/AndroidStudioProjects/github/OpenCvDemo/app/build/native-libs/native-libs.jar:unspecified@jar">
     <CLASSES>
       <root url="jar://$PROJECT_DIR$/app/build/native-libs/native-libs.jar!/" />
     </CLASSES>

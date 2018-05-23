@@ -3,12 +3,12 @@
 
     <item
         is-multidex="false"
-        jar="/Users/sunxianpeng/AndroidStudioProjects/demo/demo/OpenCvDemo/openCVLibrary24136/build/intermediates/bundles/default/classes.jar"
+        jar="/Users/sunxianpeng/AndroidStudioProjects/github/OpenCvDemo/openCVLibrary24136/build/intermediates/bundles/default/classes.jar"
         jumboMode="false"
         optimize="true"
         revision="27.0.3"
         sha1="24f7cc6209e25d0f9784a42d71a0fde027594b95">
-        <dex dex="/Users/sunxianpeng/AndroidStudioProjects/demo/demo/OpenCvDemo/app/build/intermediates/pre-dexed/debug/classes_ca3caa85aad8a9e300659df448a8d982ed481abb.jar" />
+        <dex dex="/Users/sunxianpeng/AndroidStudioProjects/github/OpenCvDemo/app/build/intermediates/pre-dexed/debug/classes_5789848edef818d1bb13c6470bc908ac02c3d2ce.jar" />
     </item>
 
 </items>

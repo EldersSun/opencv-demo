@@ -1,6 +1,7 @@
 package com.xpsun.opencvdemo.activity
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -64,6 +65,9 @@ class BaseImageInfoActivity : BaseActivity() {
             }
             R.id.houghCircles -> {
                 jumpResultTag = PICK_IMAGE_TAG_5
+            }
+            else ->{
+                return super.onOptionsItemSelected(item)
             }
         }
         startActivityForResult(takePhoto, jumpResultTag)
@@ -247,6 +251,11 @@ class BaseImageInfoActivity : BaseActivity() {
         private const val PICK_IMAGE_TAG_3 = 0x1003
         private const val PICK_IMAGE_TAG_4 = 0x1004
         private const val PICK_IMAGE_TAG_5 = 0x1005
+
+        fun start(context: Context) {
+            val intent: Intent = Intent(context, BaseImageInfoActivity::class.java)
+            context.startActivity(intent)
+        }
     }
 
 }

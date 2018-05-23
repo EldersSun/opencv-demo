@@ -37,15 +37,13 @@ class HomeMenuActivity : BaseActivity() {
             override fun onItemClickListener(view: View?, position: Int) {
                 when (position) {
                     0 -> {
-                        val intent = Intent(this@HomeMenuActivity, HomeActivity::class.java)
-                        startActivity(intent)
+                        HomeActivity.start(this@HomeMenuActivity)
                     }
                     1 -> {
-                        val intent = Intent(this@HomeMenuActivity, BaseImageInfoActivity::class.java)
-                        startActivity(intent)
+                        BaseImageInfoActivity.start(this@HomeMenuActivity)
                     }
                     2 -> {
-
+                        DetectionTargetActivity.start(this@HomeMenuActivity)
                     }
                     else -> {
 
@@ -53,10 +51,14 @@ class HomeMenuActivity : BaseActivity() {
                 }
             }
         }
+    }
 
+    override fun isShowTitleBackEvent():Boolean{
+        return false
     }
 
     companion object {
-        private val menus = listOf<String>("第一章 为图像添加效果", "第二章 检测图像的基本特征", "第三章 检测目标")
+        private val menus = listOf<String>("第一章 为图像添加效果", "第二章 检测图像的基本特征",
+                "第三章 检测目标")
     }
 }
