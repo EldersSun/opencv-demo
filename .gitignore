@@ -18,5 +18,4 @@ target/
 .DS_Store
 */tmp
 *.war
-.gradle/
-/app/release/
+.gradle/*

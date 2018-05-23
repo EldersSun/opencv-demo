@@ -21,6 +21,12 @@
         app:showAsAction="never" />
 
     <item
+        android:id="@+id/harris"
+        android:orderInCategory="1"
+        android:title="harris - 角点检测"
+        app:showAsAction="never" />
+
+    <item
         android:id="@+id/houghline"
         android:orderInCategory="1"
         android:title="houghline - 霍夫直线"

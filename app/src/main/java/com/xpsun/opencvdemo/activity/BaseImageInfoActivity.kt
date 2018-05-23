@@ -13,6 +13,7 @@ import com.xpsun.opencvdemo.framework.BaseActivity
 import org.opencv.android.Utils
 import org.opencv.core.*
 import org.opencv.imgproc.Imgproc
+import java.util.*
 
 class BaseImageInfoActivity : BaseActivity() {
 
@@ -62,13 +63,16 @@ class BaseImageInfoActivity : BaseActivity() {
             R.id.sobel -> {
                 jumpResultTag = PICK_IMAGE_TAG_3
             }
-            R.id.houghline -> {
+            R.id.harris -> {
                 jumpResultTag = PICK_IMAGE_TAG_4
             }
-            R.id.houghCircles -> {
+            R.id.houghline -> {
                 jumpResultTag = PICK_IMAGE_TAG_5
             }
-            else ->{
+            R.id.houghCircles -> {
+                jumpResultTag = PICK_IMAGE_TAG_6
+            }
+            else -> {
                 return super.onOptionsItemSelected(item)
             }
         }
@@ -96,15 +100,19 @@ class BaseImageInfoActivity : BaseActivity() {
                     sobel(bitmap)
                 }
                 PICK_IMAGE_TAG_4 -> {
-                    houghLines(bitmap)
+                    harriscorrner(bitmap)
                 }
                 PICK_IMAGE_TAG_5 -> {
+                    houghLines(bitmap)
+                }
+                PICK_IMAGE_TAG_6 -> {
                     houghCircles(bitmap)
                 }
             }
         }
     }
 
+    //霍夫圆
     private fun houghCircles(bitmap: Bitmap) {
         var circles = Mat()
         //将图像转换为灰度
@@ -130,7 +138,7 @@ class BaseImageInfoActivity : BaseActivity() {
 
             var center = Point(x, y)
 
-            Core.circle(houghCircles, center, r, Scalar(255.0, 0.0, 0.0),1)
+            Core.circle(houghCircles, center, r, Scalar(255.0, 0.0, 0.0), 1)
 
         }
 
@@ -177,6 +185,36 @@ class BaseImageInfoActivity : BaseActivity() {
         }
 
         setImageResult(houghLines, bitmap)
+    }
+
+    private fun harriscorrner(bitmap: Bitmap) {
+        val corners = Mat()
+        //将图像转换为灰度
+        Imgproc.cvtColor(originalMat, grayMat, Imgproc.COLOR_BGR2GRAY)
+
+        val tempDst = Mat()
+        //画Harris角点输出
+        val tempDstNorm = Mat()
+        Core.normalize(tempDst, tempDstNorm, 0.0, 255.0, Core.NORM_MINMAX)
+        Core.convertScaleAbs(tempDstNorm, corners)
+        //在新的图像上绘制角点
+        val r = Random()
+
+        var i = 0
+        var j = 0
+        while (i < tempDstNorm.cols()) {
+            while (j < tempDstNorm.rows()) {
+                var value = tempDstNorm[j, i]
+                if (value[0] > 150) {
+                    Core.circle(corners, Point(i.toDouble(), j.toDouble()),
+                            5, Scalar(r.nextInt(255).toDouble()), 2)
+                }
+                j++
+            }
+            i++
+        }
+
+        setImageResult(corners, bitmap)
     }
 
     //sobel 算子
@@ -253,10 +291,11 @@ class BaseImageInfoActivity : BaseActivity() {
         private const val PICK_IMAGE_TAG_3 = 0x1003
         private const val PICK_IMAGE_TAG_4 = 0x1004
         private const val PICK_IMAGE_TAG_5 = 0x1005
+        private const val PICK_IMAGE_TAG_6 = 0x1006
 
         private val TITLE_TEXT_TAG: String = "title_text_tag"
 
-        fun start(context: Context,title:String) {
+        fun start(context: Context, title: String) {
             val intent: Intent = Intent(context, BaseImageInfoActivity::class.java)
             intent.putExtra(TITLE_TEXT_TAG, title)
             context.startActivity(intent)
