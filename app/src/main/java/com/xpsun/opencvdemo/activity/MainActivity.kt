@@ -1,6 +1,7 @@
 package com.xpsun.opencvdemo.activity
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -54,6 +55,8 @@ class MainActivity : BaseActivity(), View.OnTouchListener {
     override fun initWidgetsInstance() {
         val intent = intent
         jump_type_tag = intent.getIntExtra(HomeActivity.ACTION_MODE_TAG, 0)
+        val title = intent.getStringExtra(TITLE_TEXT_TAG)
+        setTitleText(title)
 
         HiPermission.create(this)
                 .animStyle(R.style.PermissionAnimModal)//set dialog animation
@@ -99,7 +102,7 @@ class MainActivity : BaseActivity(), View.OnTouchListener {
         return super.onOptionsItemSelected(item)
     }
 
-    private fun openSelectorImage(){
+    private fun openSelectorImage() {
         val takePhoto = Intent(Intent.ACTION_PICK)
         takePhoto.type = "image/"
         startActivityForResult(takePhoto, SELECTOR_PHOTO_TAG)
@@ -139,8 +142,8 @@ class MainActivity : BaseActivity(), View.OnTouchListener {
                             val kernelErode: Mat = Imgproc.getStructuringElement(Imgproc.MORPH_ELLIPSE, Size(5.0, 5.0))
                             Imgproc.erode(src, src, kernelErode)
                         }
-                        6 ->{
-                            Imgproc.threshold(src,src,100.0,255.0,Imgproc.ADAPTIVE_THRESH_MEAN_C)
+                        6 -> {
+                            Imgproc.threshold(src, src, 100.0, 255.0, Imgproc.ADAPTIVE_THRESH_MEAN_C)
                         }
                     }
 
@@ -162,6 +165,8 @@ class MainActivity : BaseActivity(), View.OnTouchListener {
         private const val SELECTOR_PHOTO_TAG: Int = 0x1004
         private var IMAGE_SAVE_PATH: String = SysSDCardCacheDir.getImgDir().absolutePath +
                 File.separator + String.format("%s.jpg", System.currentTimeMillis())
+
+        val TITLE_TEXT_TAG: String = "title_text_tag"
     }
 
 

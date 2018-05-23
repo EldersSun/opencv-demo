@@ -18,14 +18,19 @@ class DetectionTargetActivity : BaseActivity() {
     }
 
     override fun initWidgetsInstance() {
+        val title = intent.getStringExtra(TITLE_TEXT_TAG)
+        setTitleText(title)
     }
 
     override fun initWidgetsEvent() {
     }
 
     companion object {
-        fun start(context: Context){
-            val intent :Intent = Intent(context,DetectionTargetActivity::class.java)
+        private val TITLE_TEXT_TAG: String = "title_text_tag"
+
+        fun start(context: Context, title: String) {
+            val intent: Intent = Intent(context, DetectionTargetActivity::class.java)
+            intent.putExtra(TITLE_TEXT_TAG, title)
             context.startActivity(intent)
         }
     }

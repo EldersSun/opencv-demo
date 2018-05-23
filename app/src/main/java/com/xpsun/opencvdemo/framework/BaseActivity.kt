@@ -1,9 +1,11 @@
 package com.xpsun.opencvdemo.framework
 
 import android.os.Bundle
+import android.support.v7.app.ActionBar
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import com.jph.takephoto.app.TakePhotoFragmentActivity
+import com.xpsun.opencvdemo.R
 import org.opencv.android.BaseLoaderCallback
 import org.opencv.android.LoaderCallbackInterface
 import org.opencv.android.OpenCVLoader
@@ -13,16 +15,19 @@ import org.opencv.android.OpenCVLoader
  */
 abstract class BaseActivity : AppCompatActivity() {
 
+    private var actionBar: ActionBar? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(initWidgetsLayoutId())
+
+        if (isShowTitleBackEvent()) {
+            showTitleback()
+        }
+
         initWidgets()
         initWidgetsInstance()
         initWidgetsEvent()
-
-        if(isShowTitleBackEvent()){
-            showTitleback()
-        }
     }
 
     abstract fun initWidgetsLayoutId(): Int
@@ -53,12 +58,16 @@ abstract class BaseActivity : AppCompatActivity() {
     }
 
     private fun showTitleback() {
-        val actionBar = supportActionBar
+        actionBar = supportActionBar
         actionBar?.setHomeButtonEnabled(true)
         actionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
-    open fun isShowTitleBackEvent():Boolean = true
+    open fun setTitleText(title: String) {
+        actionBar?.title = title
+    }
+
+    open fun isShowTitleBackEvent(): Boolean = true
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {

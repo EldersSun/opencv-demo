@@ -31,10 +31,12 @@ class BaseImageInfoActivity : BaseActivity() {
 
     override fun initWidgetsInstance() {
 
+        val title = intent.getStringExtra(TITLE_TEXT_TAG)
+        setTitleText(title)
+
         originalMat = Mat(baseImageInfoShow.height, baseImageInfoShow.width, CvType.CV_8U)
         grayMat = Mat()
         cannyEdges = Mat()
-
     }
 
     override fun initWidgetsEvent() {
@@ -252,8 +254,11 @@ class BaseImageInfoActivity : BaseActivity() {
         private const val PICK_IMAGE_TAG_4 = 0x1004
         private const val PICK_IMAGE_TAG_5 = 0x1005
 
-        fun start(context: Context) {
+        private val TITLE_TEXT_TAG: String = "title_text_tag"
+
+        fun start(context: Context,title:String) {
             val intent: Intent = Intent(context, BaseImageInfoActivity::class.java)
+            intent.putExtra(TITLE_TEXT_TAG, title)
             context.startActivity(intent)
         }
     }

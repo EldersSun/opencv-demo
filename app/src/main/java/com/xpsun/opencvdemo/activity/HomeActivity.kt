@@ -2,6 +2,7 @@ package com.xpsun.opencvdemo.activity
 
 import android.content.Context
 import android.content.Intent
+import android.service.quicksettings.Tile
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.View
@@ -25,6 +26,9 @@ class HomeActivity : BaseActivity(), OnItemRecyclerViewClickListener {
     }
 
     override fun initWidgetsInstance() {
+        val title = intent.getStringExtra(TITLE_TEXT_TAG)
+        setTitleText(title)
+
         homeContentShow.layoutManager = LinearLayoutManager(this)
         homeContentShowAdapter = HomeContentShowAdapter(this)
         homeContentShow.adapter = homeContentShowAdapter
@@ -52,6 +56,7 @@ class HomeActivity : BaseActivity(), OnItemRecyclerViewClickListener {
             in 0..6 -> {
                 val intent = Intent(this, MainActivity::class.java)
                 intent.putExtra(ACTION_MODE_TAG, position)
+                intent.putExtra(MainActivity.TITLE_TEXT_TAG,menus[position])
                 startActivity(intent)
             }
         }
@@ -59,12 +64,15 @@ class HomeActivity : BaseActivity(), OnItemRecyclerViewClickListener {
 
     companion object {
         const val ACTION_MODE_TAG: String = "ACTION_MODE"
+        private val TITLE_TEXT_TAG: String = "title_text_tag"
+
         private val menus = listOf<String>(
                 "mean blur - 模糊", "gaussian blur - 高斯模糊", "median blur - 中值模糊",
                 "sharpen - 图像锐化", "dilate - 膨胀图像", "erode - 腐蚀图像", "threshold - 阈值")
 
-        fun start(context: Context) {
+        fun start(context: Context, title: String) {
             val intent: Intent = Intent(context, HomeActivity::class.java)
+            intent.putExtra(TITLE_TEXT_TAG, title)
             context.startActivity(intent)
         }
     }

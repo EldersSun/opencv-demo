@@ -1,6 +1,5 @@
 package com.xpsun.opencvdemo.activity
 
-import android.content.Intent
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.View
@@ -29,6 +28,7 @@ class HomeMenuActivity : BaseActivity() {
 
         homeContentShowAdapter.menus = menus
         homeContentShowAdapter.notifyDataSetChanged()
+
     }
 
     override fun initWidgetsEvent() {
@@ -37,13 +37,13 @@ class HomeMenuActivity : BaseActivity() {
             override fun onItemClickListener(view: View?, position: Int) {
                 when (position) {
                     0 -> {
-                        HomeActivity.start(this@HomeMenuActivity)
+                        HomeActivity.start(this@HomeMenuActivity,menus[position])
                     }
                     1 -> {
-                        BaseImageInfoActivity.start(this@HomeMenuActivity)
+                        BaseImageInfoActivity.start(this@HomeMenuActivity,menus[position])
                     }
                     2 -> {
-                        DetectionTargetActivity.start(this@HomeMenuActivity)
+                        DetectionTargetActivity.start(this@HomeMenuActivity,menus[position])
                     }
                     else -> {
 
